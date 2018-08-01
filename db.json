@@ -143,10 +143,8 @@
       ]
     },
     {
-      "id": 13,
-      "name": "Indigo Montoya",
-      "age": 29,
-      "email": "indigomontoya@gmail.com"
+      "age": 31,
+      "id": 13
     }
   ]
 }

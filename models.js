@@ -16,7 +16,16 @@ class User {
   }
 
   create(data) {
+    data.friends = data.friends ? data.friends.map(id => ({ id })) : []
     return this.api.post('/users', data).then(res => res.data)
+  }
+
+  update(id, data) {
+    return this.api.put(`/users/${id}`, data).then(res => res.data)
+  }
+
+  delete(id) {
+    return this.api.delete(`/users/${id}`).then(() => ({ id }))
   }
 }
 

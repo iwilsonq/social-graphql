@@ -19,11 +19,13 @@ export const typeDefs = gql`
     name: String
     age: Int
     email: String
-    friendIds: [Int]
+    friends: [Int]
   }
 
   type Mutation {
     createUser(input: CreateUserInput!): User
+    updateUser(id: Int!, input: CreateUserInput!): User
+    deleteUser(id: Int!): User
   }
 
 `
@@ -40,14 +42,18 @@ export const resolvers = {
         return
       }
 
-      return Promise.all(
-        source.friends.map(({ id }) => userModel.find(id))
-      )
+      return Promise.all(source.friends.map(({ id }) => userModel.find(id)))
     }
   },
   Mutation: {
     createUser(source, args) {
       return userModel.create(args.input)
+    },
+    updateUser(source, args) {
+      return userModel.update(args.id, args.input)
+    },
+    deleteUser(source, args) {
+      return userModel.delete(args.id)
     }
   }
 }
